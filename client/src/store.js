@@ -10,7 +10,8 @@ Vue.use(VueAxios, axios)
 const store = new Vuex.Store({
   state: {
     isLogin: false,
-    name: ''
+    name: '',
+    content: []
   },
   mutations: {
     loginState (state, name) {
@@ -21,6 +22,9 @@ const store = new Vuex.Store({
       state.isLogin = !state.isLogin
       state.name = ''
       window.localStorage.clear()
+    },
+    getContent(state, contentData) {
+      state.content.push(contentData)
     }
   },
   actions: {
@@ -60,6 +64,16 @@ const store = new Vuex.Store({
     },
     logout({commit}){
       commit('logoutClear')
+    },
+    getContent ({commit}) {
+      axios.get('http://localhost:3000/api/articles')
+      .then((response)=>{
+        console.log(response.data);
+          commit('getContent', response.data)
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
     }
   }
 })
