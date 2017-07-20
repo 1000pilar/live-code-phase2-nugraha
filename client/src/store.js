@@ -24,7 +24,7 @@ const store = new Vuex.Store({
       window.localStorage.clear()
     },
     getContent(state, contentData) {
-      state.content.push(contentData)
+      state.content = contentData
     }
   },
   actions: {
