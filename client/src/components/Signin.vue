@@ -1,25 +1,40 @@
 <template lang="html">
   <div class="">
+    <Navbar></Navbar>
+
     <form class="form-inline" action="/action_page.php">
       <div class="form-group">
-        <label for="email">Username:</label>
-        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+        <label >Username:</label>
+        <input type="text" class="form-control" placeholder="Enter username" v-model="userData.username">
       </div>
       <div class="form-group">
         <label for="pwd">Password:</label>
-        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+        <input type="password" class="form-control" placeholder="Enter password" v-model="userData.password">
       </div>
-      <div class="checkbox">
-        <label><input type="checkbox" name="remember"> Remember me</label>
-      </div>
-      <button type="submit" class="btn btn-default">Submit</button>
+      <button type="submit" @click="submitLogin">Submit</button>
     </form>
   </div>
 </template>
 
 <script>
+import Navbar from './Navbar'
 export default {
-  
+  components: {
+    Navbar
+  },
+  data () {
+    return {
+      userData : {
+        username: '',
+        password: ''
+      }
+    }
+  },
+  methods: {
+    submitLogin () {
+      this.$store.dispatch('login', userData)
+    }
+  }
 }
 </script>
 
