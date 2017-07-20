@@ -13,12 +13,13 @@ const store = new Vuex.Store({
     name: ''
   },
   mutations: {
-    loginState (state) {
+    loginState (state, name) {
       state.isLogin = !state.isLogin
-      state.name = window.localStorage.getItem('name')
+      state.name = name
     },
     logoutClear (state) {
       state.isLogin = !state.isLogin
+      state.name = ''
       window.localStorage.clear()
     }
   },
@@ -30,14 +31,28 @@ const store = new Vuex.Store({
       })
       .then((response)=>{
         if(response.data.token){
+          console.log(response.data);
           window.localStorage.setItem('token', response.data.token)
-          window.localStorage.setItem('name', response.data.name)
+          window.localStorage.setItem('name', response.data.username)
           window.localStorage.setItem('id', response.data.id)
-          commit('loginState')
-          this.$router.push('/')
+          commit('loginState', response.data.username)
+          router.push('/')
         } else {
           console.log({msg: 'error'});
         }
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+    },
+    signup ({commit}, userData){
+      axios.post('http://localhost:3000/api/users/signup', {
+        username: userData.username,
+        password: userData.password
+      })
+      .then((response)=>{
+          console.log(response.data);
+          router.push('/signin')
       })
       .catch((err)=>{
         console.log(err);

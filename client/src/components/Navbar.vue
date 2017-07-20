@@ -5,7 +5,7 @@
         <div class="navbar-header">
           <a class="navbar-brand" href="#">Nugraha Vuex</a>
         </div>
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right" v-if="!islogin">
           <li><a @click="toSignup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
           <li><a @click="toSignin"><span class="glyphicon glyphicon-log-in"></span > Login</a></li>
         </ul>

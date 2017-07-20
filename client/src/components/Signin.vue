@@ -1,8 +1,8 @@
 <template lang="html">
   <div class="">
     <Navbar></Navbar>
-
-    <form class="form-inline" action="/action_page.php">
+    <h1>Signin Form</h1>
+    <form class="form-inline">
       <div class="form-group">
         <label >Username:</label>
         <input type="text" class="form-control" placeholder="Enter username" v-model="userData.username">
@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     submitLogin () {
-      this.$store.dispatch('login', userData)
+      this.$store.dispatch('login', this.userData)
     }
   }
 }
