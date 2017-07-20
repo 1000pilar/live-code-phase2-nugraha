@@ -8,6 +8,7 @@ const express = require('express')
     , mongoose = require('mongoose')
 
 const users = require('./routes/users.js')
+const articles = require('./routes/articles.js')
 
 mongoose.connect('mongodb://localhost/live-code-final-nugraha', ()=>{
   console.log(`Connect to mongodb database`);
@@ -28,6 +29,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 
 app.use('/api/users', users)
+app.use('/api/articles', articles)
 
 app.listen(3000, ()=>{
   console.log(`Connect to port: 3000`);
