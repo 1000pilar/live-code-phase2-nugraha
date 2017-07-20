@@ -60,7 +60,7 @@ module.exports = {
   },
 
   update: (req, res)=>{
-    Article.find({_id: req.params.id}, (err, article)=>{
+    Article.findOne({_id: req.params.id}, (err, article)=>{
       if(!err){
         const updateArticle = {
           title: req.body.title || article.title,
